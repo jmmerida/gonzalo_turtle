@@ -146,7 +146,9 @@ class Maze:
             self.draw_reward()
 
     def draw_reward(self) -> None:
-        qr = segno.make("https://bit.ly/3Hu5oGv")
+        qr = segno.make(
+            "git clone https://github.com/jmmerida/gonzalo_turtle.git && checkout gonza"
+        )
         qr.save("config/chisme.png", border=5, scale=20)
 
         self.wn.clear()
