@@ -7,7 +7,8 @@
   // "features": {
   //   "ghcr.io/devcontainers/features/python:1": {}
   // },
-  "runArgs": ["--net=host"]
+  "runArgs": ["--net=host"],
+  "postCreateCommand": "pip install -r requirements.txt"
 
   // Features to add to the dev container. More info: https://containers.dev/features.
   // "features": {},
