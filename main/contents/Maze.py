@@ -78,7 +78,7 @@ class Maze:
 
         for i in range(len(self.maze)):
             for j in range(len(self.maze[i])):
-                if self.maze[i][j] == "S":
+                if self.maze[i][j] == "GONZA":
                     self.player.goto(
                         j * 50 - self.start_x + 25, self.start_y - i * 50 - 25
                     )
@@ -88,8 +88,6 @@ class Maze:
 
         self.wn.listen()
         self.wn.onkeypress(self.go_up, "Up")
-        self.wn.onkeypress(self.go_down, "Down")
-        self.wn.onkeypress(self.go_left, "Left")
         self.wn.onkeypress(self.go_right, "Right")
 
     def go_up(self) -> None:
@@ -98,9 +96,8 @@ class Maze:
         x, y = self.update_position()
         print("x = {0}, y = {1}".format(x, y))
         print(self.maze[y - 1][x])
-        if y < len(self.maze) - 1 and self.maze[y - 1][x] != "#":
+        if y < len(self.maze) - 1 and self.maze[y + 1][x] != "#":
             self.player.sety(self.player.ycor() + 50)
-            self.win()
 
     def go_down(self) -> None:
         """Performs the "go down" action"""
@@ -108,7 +105,7 @@ class Maze:
         x, y = self.update_position()
         print("x = {0}, y = {1}".format(x, y))
         print(self.maze[y + 1][x])
-        if y > 0 and self.maze[y + 1][x] != "#":
+        if y > 0 and self.maze[y - 1][x] != "#":
             self.player.sety(self.player.ycor() - 50)
             self.win()
 
@@ -135,7 +132,7 @@ class Maze:
     def update_position(self) -> Tuple[int, int]:
         x = int((self.player.xcor() + self.start_x) / 50)
         y = int((self.start_y - self.player.ycor()) / 50)
-        return x, y
+        return x, x
 
     def has_won(self, x: int, y: int) -> bool:
         return self.maze[y][x] == "X"
@@ -146,7 +143,9 @@ class Maze:
             self.draw_reward()
 
     def draw_reward(self) -> None:
-        qr = segno.make("https://bit.ly/3Hu5oGv")
+        qr = segno.make(
+            "git clone https://github.com/jmmerida/gonzalo_turtle.git && checkout gonza"
+        )
         qr.save("config/chisme.png", border=5, scale=20)
 
         self.wn.clear()
